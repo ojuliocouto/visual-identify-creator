@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>${title} · ${brand}</title>
+  <style>
+    :root { color-scheme: light; --paper: #f5f3ed; --ink: #1b1b19; --muted: #56564e; --line: #d0cfc6; --panel: #fffefa; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, p, figure { margin: 0; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; line-height: 1.08; letter-spacing: -.035em; }
+    h3 { font-size: 1.18rem; line-height: 1.35; letter-spacing: -.02em; }
+    h4 { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+    p, li, h1, h2, h3, h4, dd, code, .index, .label, .brand { overflow-wrap: anywhere; }
+    p, li { white-space: pre-line; }
+    a { color: inherit; text-underline-offset: .25em; }
+    a:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
+    .skip { position: absolute; left: 1rem; top: -6rem; padding: .75rem 1rem; background: var(--ink); color: white; z-index: 10; }
+    .skip:focus { top: 1rem; }
+    .shell { width: min(1240px, calc(100% - 6rem)); margin-inline: auto; }
+    .proposal-bar { background: var(--ink); color: var(--paper); padding: .6rem 0; font-size: .72rem; font-weight: 600; letter-spacing: .11em; }
+    .proposal-bar .shell { display: flex; flex-wrap: wrap; gap: .35rem 2rem; justify-content: space-between; }
+    .proposal-bar span:last-child { font-weight: 400; letter-spacing: .025em; }
+    .masthead { position: sticky; top: 0; z-index: 3; background: var(--paper); border-bottom: 1px solid var(--line); }
+    .masthead-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1.1rem; }
+    .brand { max-width: 30%; font-size: .88rem; font-weight: 650; letter-spacing: -.01em; }
+    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .55rem 1.3rem; font-size: .78rem; }
+    nav a { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 180ms ease; }
+    nav a:hover { border-color: var(--ink); }
+    .hero { padding-block: 5.5rem 4rem; animation: arrive 420ms ease-out both; }
+    .eyebrow, .label { color: var(--muted); font-size: .73rem; text-transform: uppercase; letter-spacing: .11em; }
+    .hero h1 { max-width: 1050px; font-size: clamp(3.1rem, 6.5vw, 6rem); margin-block: 1.2rem 1.8rem; }
+    .hero-summary { max-width: 780px; font-size: 1.19rem; line-height: 1.65; color: var(--muted); }
+    .meta { display: grid; grid-template-columns: 1fr 1.2fr .8fr; gap: 2rem; margin: 3rem 0 0; padding-top: 1.3rem; border-top: 1px solid var(--ink); }
+    .meta dt { color: var(--muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; }
+    .meta dd { margin: .45rem 0 0; font-size: .96rem; font-weight: 550; }
+    .notice { border: 1px solid var(--line); border-left: 3px solid var(--ink); padding: 1rem 1.2rem; margin-top: 2rem; color: var(--muted); font-size: .88rem; }
+    .notice strong { color: var(--ink); }
+    section { border-top: 1px solid var(--ink); padding-block: 2rem 4.5rem; }
+    .section-heading { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; margin-bottom: 2.2rem; }
+    .section-number { padding-top: .5rem; font-size: .78rem; letter-spacing: .12em; color: var(--muted); }
+    .section-heading h2 { font-size: clamp(2.25rem, 4.3vw, 3.6rem); }
+    .section-heading p { max-width: 750px; color: var(--muted); margin-top: .9rem; font-size: .95rem; }
+    .direction-grid, .application-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 3rem 2rem; }
+    .direction { min-width: 0; }
+    .direction-heading { display: flex; align-items: baseline; gap: .9rem; min-height: 4rem; padding-bottom: 1rem; }
+    .index { display: inline-block; flex: 0 0 auto; max-width: 30%; min-width: 2rem; color: var(--muted); font-size: .76rem; font-weight: 600; letter-spacing: .09em; }
+    .board { margin-bottom: 1.25rem; }
+    .board-surface { position: relative; width: 100%; aspect-ratio: 4 / 3; background: var(--panel); border: 1px solid var(--line); overflow: hidden; }
+    .board-surface img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+    .placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .45rem; padding: 1.5rem; text-align: center; }
+    .placeholder-mark { color: #97968e; font: 400 3rem/1 Georgia, serif; margin-bottom: .65rem; }
+    .placeholder strong { font-size: .94rem; font-weight: 500; }
+    .placeholder span:last-child { color: var(--muted); font-size: .78rem; }
+    figcaption { border-bottom: 1px solid var(--line); padding-block: .65rem; color: var(--muted); font-size: .7rem; letter-spacing: .03em; }
+    .rationale { font-size: 1rem; line-height: 1.7; margin-bottom: 1.3rem; }
+    .comparison { display: grid; gap: 1.05rem; }
+    ul { margin: .55rem 0 0; padding-left: 1.2rem; }
+    li { padding-left: .15rem; }
+    li + li { margin-top: .38rem; }
+    .comparison ul, .comparison .empty { color: var(--muted); font-size: .88rem; }
+    .palette-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .swatch { background: var(--paper); min-width: 0; }
+    .color { height: 150px; border-bottom: 1px solid var(--line); }
+    .swatch-info { padding: 1.15rem; }
+    .swatch-info h3 { font-size: .99rem; margin-bottom: .4rem; }
+    .swatch-info code { font-size: .83rem; }
+    .swatch-info p { color: var(--muted); font-size: .83rem; margin-top: .6rem; }
+    .section-note { color: var(--muted); font-size: .85rem; margin-top: 1.1rem; max-width: 840px; }
+    .type-row { display: grid; grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; padding-block: 1.7rem; border-bottom: 1px solid var(--line); }
+    .type-row:first-child { border-top: 1px solid var(--line); }
+    .type-number { color: var(--muted); font-size: .75rem; padding-top: .5rem; }
+    .type-row h3 { font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 500; }
+    .type-row p { color: var(--muted); margin-top: .4rem; font-size: .9rem; }
+    .type-license .label { font-size: .65rem; }
+    .application h3 { margin-bottom: .65rem; }
+    .application p { color: var(--muted); font-size: .92rem; }
+    .decision-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
+    .decision-grid h3 { font-size: 1rem; padding-bottom: .8rem; border-bottom: 1px solid var(--line); }
+    .decision-grid ul { color: var(--muted); margin-top: 1rem; }
+    .decision-footer { margin-top: 2.5rem; background: var(--ink); color: var(--paper); padding: 1.5rem; font-size: .92rem; }
+    .decision-footer strong { display: block; font-size: 1rem; margin-bottom: .4rem; }
+    .empty { color: var(--muted); font-size: .92rem; margin-top: .5rem; }
+    .footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 2rem; border-top: 1px solid var(--line); padding-block: 1.5rem 3rem; font-size: .75rem; color: var(--muted); }
+    @keyframes arrive { from { opacity: .5; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (max-width: 850px) {
+      .shell { width: calc(100% - 3rem); }
+      .masthead-inner { align-items: flex-start; }
+      nav { gap: .4rem .9rem; }
+      .hero { padding-top: 3.5rem; }
+      .section-heading { grid-template-columns: 3rem 1fr; }
+      .direction-grid, .application-grid { gap: 2.5rem 1.25rem; }
+      .type-row { grid-template-columns: 2rem 1fr 1fr; gap: 1rem; }
+    }
+    @media (max-width: 600px) {
+      html { scroll-padding-top: 7rem; }
+      .shell { width: calc(100% - 2rem); }
+      .masthead-inner { display: block; padding-block: .8rem; }
+      .brand { max-width: 100%; margin-bottom: .65rem; }
+      nav { justify-content: flex-start; font-size: .73rem; }
+      .hero { padding-block: 2.6rem 2.5rem; }
+      .hero h1 { font-size: clamp(2.6rem, 10vw, 3.6rem); }
+      .hero-summary { font-size: 1.05rem; }
+      .meta { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+      .meta dd { margin-top: .2rem; }
+      section { padding-block: 1.5rem 3rem; }
+      .section-heading { grid-template-columns: 2rem 1fr; gap: .5rem; }
+      .section-heading h2 { font-size: 2.2rem; }
+      .direction-grid, .application-grid, .decision-grid { grid-template-columns: 1fr; }
+      .direction-heading { min-height: auto; }
+      .palette-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .color { height: 120px; }
+      .swatch-info { padding: .85rem; }
+      .type-row { grid-template-columns: 2rem 1fr; }
+      .type-license { grid-column: 2; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    @media print {
+      @page { size: A4; margin: 16mm; }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      body { background: white; font-size: 10pt; }
+      .shell { width: 100%; }
+      .masthead { position: static; }
+      nav, .skip { display: none; }
+      .brand { max-width: 100%; }
+      .proposal-bar { padding: 2mm 0; }
+      .hero { padding-block: 14mm 10mm; }
+      .hero h1 { font-size: 38pt; }
+      .hero-summary { font-size: 12pt; }
+      .meta { gap: 5mm; margin-top: 10mm; }
+      section { padding-block: 8mm 10mm; break-before: page; }
+      .section-heading { grid-template-columns: 10mm 1fr; margin-bottom: 7mm; }
+      .section-heading h2 { font-size: 27pt; }
+      .direction-grid, .application-grid { gap: 9mm 6mm; }
+      .direction, .application, .swatch, .type-row { break-inside: avoid; }
+      .palette-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .color { height: 30mm; }
+      .notice, .decision-footer { break-inside: avoid; }
+      .footer { padding-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#overview">Ir para o conteúdo</a>
+  <div class="proposal-bar"><div class="shell"><span>PROPOSTA PARA REVISÃO</span><span>Nenhuma aprovação é inferida por este arquivo</span></div></div>
+  <header class="masthead">
+    <div class="shell masthead-inner">
+      <div class="brand">${brand}</div>
+      <nav aria-label="Seções da apresentação">
+        <a href="#overview">Visão geral</a><a href="#directions">Direções</a><a href="#palette">Paleta</a><a href="#typography">Tipografia</a><a href="#applications">Aplicações</a><a href="#decisions">Decisões</a>
+      </nav>
+    </div>
+  </header>
+  <main class="shell">
+    <div class="hero" id="overview">
+      <p class="eyebrow">Identidade visual · Documento de revisão</p>
+      <h1>${title}</h1>
+      <p class="hero-summary">${summary}</p>
+      <dl class="meta">
+        <div><dt>Etapa informada</dt><dd>${stage}</dd></div>
+        <div><dt>Status informado</dt><dd>${status}</dd></div>
+        <div><dt>Direções em análise</dt><dd>${direction_count}</dd></div>
+      </dl>
+      <p class="notice"><strong>Escopo desta apresentação:</strong> organizar os materiais fornecidos para revisão. Textos de status, licenças e justificativas são declarações da entrada, não verificações independentes. Ausências permanecem sinalizadas.</p>
+    </div>
+    <section id="directions" aria-labelledby="directions-title">
+      <div class="section-heading"><span class="section-number">01</span><div><h2 id="directions-title">Direções visuais</h2><p>Mesma área de exibição para cada prancha, sem corte. A escala percebida depende do enquadramento dos arquivos enviados. Para uma comparação justa, use arquivos com o mesmo canvas e margens equivalentes.</p></div></div>
+      <div class="direction-grid">${directions}</div>
+    </section>
+    <section id="palette" aria-labelledby="palette-title">
+      <div class="section-heading"><span class="section-number">02</span><div><h2 id="palette-title">Paleta e função</h2><p>Cores declaradas e seus papéis. As amostras não demonstram, por si só, contraste acessível ou reprodução em impressão.</p></div></div>
+      <div class="palette-grid">${palette}</div>
+      <p class="section-note">Valores em sRGB/HEX. Conversão para CMYK, prova física e verificação das combinações de texto e fundo continuam pendentes quando não há evidência registrada.</p>
+    </section>
+    <section id="typography" aria-labelledby="typography-title">
+      <div class="section-heading"><span class="section-number">03</span><div><h2 id="typography-title">Sistema tipográfico</h2><p>Famílias propostas, função e situação de licença informada. Este documento usa apenas fontes do sistema e não é uma prova tipográfica das famílias listadas.</p></div></div>
+      <div>${typography}</div>
+      <p class="section-note">Nenhuma fonte é baixada, incorporada ou licenciada por este gerador. Confirme os arquivos, a licença aplicável e a renderização antes de aprovar.</p>
+    </section>
+    <section id="applications" aria-labelledby="applications-title">
+      <div class="section-heading"><span class="section-number">04</span><div><h2 id="applications-title">Aplicações</h2><p>Testes de uso fornecidos para análise. Um mockup não substitui a validação no tamanho e no suporte reais.</p></div></div>
+      <div class="application-grid">${applications}</div>
+    </section>
+    <section id="decisions" aria-labelledby="decisions-title">
+      <div class="section-heading"><span class="section-number">05</span><div><h2 id="decisions-title">Decisões e limites</h2><p>Registro para revisão humana. O gerador não decide uma direção, não valida direitos de uso e não autoriza publicação.</p></div></div>
+      <div class="decision-grid"><div><h3>Decisões registradas</h3>${decisions}</div><div><h3>Limitações declaradas</h3>${limitations}</div></div>
+      <div class="decision-footer"><strong>Renderização não comprova QA visual</strong>Abra o HTML, confira desktop e celular, compare as pranchas no mesmo tamanho e registre o parecer de quem aprova. A exportação para PDF também exige revisão própria.</div>
+    </section>
+    <footer class="footer"><span>${brand} · Documento local de revisão</span><span>Sem publicação automática · Sem aprovação inferida</span></footer>
+  </main>
+</body>
+</html>

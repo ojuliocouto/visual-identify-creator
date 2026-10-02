@@ -1,0 +1,4 @@
+interface:
+  display_name: "Visual Identify Creator"
+  short_description: "Identidade visual com imagens nativas do Codex"
+  default_prompt: "Use $visual-identify-creator para criar a identidade visual da minha marca com o motor nativo de imagens do Codex, preservando o que já foi aprovado."

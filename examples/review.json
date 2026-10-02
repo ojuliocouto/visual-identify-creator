@@ -1,0 +1,49 @@
+{
+  "brand": "Ateliê Horizonte",
+  "title": "Uma estrutura para comparar direções",
+  "summary": "Exemplo fictício de preenchimento. Este arquivo demonstra a estrutura da apresentação, não apresenta uma identidade final. Nenhum logo, retrato ou outro ativo de marca foi fornecido ou inventado.",
+  "stage": "Exemplo de estrutura",
+  "status": "Proposta fictícia, sem aprovação e sem QA visual",
+  "directions": [
+    {
+      "id": "A",
+      "title": "Hierarquia editorial",
+      "rationale": "Hipótese fictícia para testar títulos, respiro e organização da informação. Sem imagem, esta descrição não demonstra uma solução gráfica.",
+      "keeps": ["Nome fictício Ateliê Horizonte", "Conteúdo legível em telas pequenas"],
+      "changes": ["Prioridade dos títulos e separação das informações"],
+      "risks": ["Não há logo nem prancha visual para comparar", "Contraste, redução e impressão não foram testados"]
+    },
+    {
+      "id": "B",
+      "title": "Organização modular",
+      "rationale": "Segunda hipótese fictícia para comparar ritmo e distribuição de conteúdo. Nenhuma direção está recomendada ou aprovada.",
+      "keeps": ["O mesmo nome fictício e conteúdo da direção A", "A mesma área de apresentação usada na direção A"],
+      "changes": ["Agrupamento das informações em unidades repetíveis"],
+      "risks": ["Sem arte fornecida, não há evidência de execução", "Repetição excessiva precisa ser avaliada em aplicações reais"]
+    }
+  ],
+  "palette": [
+    {"name": "Carvão de exemplo", "hex": "#20211F", "role": "Exemplo de cor para texto; combinações ainda não validadas"},
+    {"name": "Papel de exemplo", "hex": "#F4F1E9", "role": "Exemplo de superfície clara; não é decisão de marca"},
+    {"name": "Verde de exemplo", "hex": "#42564A", "role": "Exemplo de acento; uso e contraste pendentes"}
+  ],
+  "typography": [
+    {"family": "Família de títulos a definir", "role": "Títulos e chamadas", "license": "Não verificada. Nenhum arquivo de fonte fornecido."},
+    {"family": "Família de leitura a definir", "role": "Corpo de texto e informações de apoio", "license": "Não verificada. Nenhuma licença é presumida."}
+  ],
+  "applications": [
+    {"title": "Cartão de exemplo", "description": "Espaço reservado. Nenhuma imagem foi fornecida. Não é arte final nem prova de impressão."},
+    {"title": "Publicação de exemplo", "description": "Espaço reservado para futuro teste em tela pequena. Sem mockup gerado, sem foto e sem logo inventado."}
+  ],
+  "decisions": [
+    "Substituir este conteúdo fictício pelo briefing e pelos materiais autorizados",
+    "Fornecer pranchas no mesmo canvas e com margens equivalentes antes da comparação",
+    "Solicitar parecer explícito após o QA visual; nenhuma aprovação está registrada neste exemplo"
+  ],
+  "limitations": [
+    "Exemplo de estrutura, não é uma identidade final",
+    "Sem logo, fotos, pranchas ou fontes fornecidas",
+    "A geração do HTML não verifica direitos autorais, licenças ou disponibilidade de nome",
+    "Não houve inspeção visual de desktop, celular, PDF ou suporte físico neste exemplo"
+  ]
+}
